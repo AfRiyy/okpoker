@@ -1,11 +1,12 @@
 /*
 * File: MainWindow.java
-* Author: Nagy József
-* Copyright: 2021, Nagy József 
-* Date: 2021-09-11
+* Author: Madarász Dávid
+* Original from repoker, from Nagy József
+* Copyright: 2021, Madarász Dávid
+* Date: 2021-09-13
 * Licenc: MIT
-*
 */
+
 package views;
 
 import java.awt.Color;
@@ -30,7 +31,6 @@ public class MainWindow extends JFrame {
     public JButton turnButton = new JButton();
     public JButton riverButton = new JButton();
 
-
     public MainWindow() {
         this.tablePanel.setSize(100, 100);
         this.tablePanel.setBackground(Color.LIGHT_GRAY);
@@ -51,11 +51,8 @@ public class MainWindow extends JFrame {
         this.tablePanel.add(riverButton);
         this.turnButton.setVisible(false);
         this.riverButton.setVisible(false);
-                
 
-        this.setLayout(new BoxLayout(
-            this.getContentPane(), 
-            BoxLayout.PAGE_AXIS));
+        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 
         this.add(buttonPanel);
         this.add(tablePanel);
@@ -63,5 +60,5 @@ public class MainWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300, 250);
     }
-    
+
 }
