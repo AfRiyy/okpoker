@@ -14,7 +14,12 @@ import views.MainWindow;
 
 public class MainController {
 
-    enum Round {
+    MainWindow mainWindow;
+    String[] cards = { 
+     "2", "3", "4", "5", "6", "7", "8",
+     "9", "10", "B", "D", "K", "A" };
+    Deal round = Deal.PREFLOP;
+    enum Deal {
         PREFLOP, FLOP, TURN, RIVER, SHOW
     }
 
@@ -28,20 +33,19 @@ public class MainController {
         this.mainWindow.startBtn.addActionListener(event -> {
             Random random = new Random();
 
-            // Az ember kártyái
-            int hcard1 = random.nextInt(13);
-            int hcard2 = random.nextInt(13);
-            // A számítógép kártyái
-            int ccard1 = random.nextInt(13);
-            int ccard2 = random.nextInt(13);
+            int humanCard1 = random.nextInt(13);
+            int humanCard2 = random.nextInt(13);
+
+            int computerCard1 = random.nextInt(13);
+            int computerCard2 = random.nextInt(13);
 
             random = null;
-            String humanCard1Str = cards[hcard1];
-            String humanCard2Str = cards[hcard2];
+            String humanCard1Str = cards[humanCard1];
+            String humanCard2Str = cards[humanCard2];
             this.mainWindow.humanCard1Btn.setText(humanCard1Str);
             this.mainWindow.humanCard2Btn.setText(humanCard2Str);
 
-            System.out.printf("%d %d\n", hcard1, hcard2);
+            System.out.printf("%d %d\n", humanCard1, humanCard2);
 
         });
         this.mainWindow.stopBtn.addActionListener(event -> {
@@ -55,7 +59,7 @@ public class MainController {
             /*
              * TODO: A kártya színeket is le kell generálni ♠ ♥ ♦ ♣
              */
-            if (this.round == Round.PREFLOP) {
+            if (this.round == Deal.PREFLOP) {
                 int flop1 = getRandom();
                 int flop2 = getRandom();
                 int flop3 = getRandom();
@@ -70,22 +74,22 @@ public class MainController {
                 this.mainWindow.flop1Btn.setVisible(true);
                 this.mainWindow.flop2Btn.setVisible(true);
                 this.mainWindow.flop3Btn.setVisible(true);
-                this.round = Round.FLOP;
+                this.round = Deal.FLOP;
                 return;
             }
-            if (this.round == Round.FLOP) {
+            if (this.round == Deal.FLOP) {
 
                 int turn = getRandom();
                 this.mainWindow.turnButton.setText(cards[turn]);
                 this.mainWindow.turnButton.setVisible(true);
-                this.round = Round.TURN;
+                this.round = Deal.TURN;
                 return;
             }
-            if (this.round == Round.TURN) {
+            if (this.round == Deal.TURN) {
                 int river = getRandom();
                 this.mainWindow.riverButton.setText(cards[river]);
                 this.mainWindow.riverButton.setVisible(true);
-                this.round = Round.RIVER;
+                this.round = Deal.RIVER;
             }
         });
 
@@ -96,8 +100,5 @@ public class MainController {
         this.initEvent();
     }
 
-    MainWindow mainWindow;
-    String[] cards = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "B", "D", "K", "A" };
-    Round round = Round.PREFLOP;
 
 }
